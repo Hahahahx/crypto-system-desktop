@@ -1,0 +1,64 @@
+.header {
+  height: @headerHei;
+  .flex-between();
+  padding: 0;
+
+  &.drag-header {
+    -webkit-app-region: drag;
+    button {
+      -webkit-app-region: no-drag;
+    }
+  }
+
+  .title {
+    color: @white2;
+    flex: 8;
+    padding: 0;
+    margin: 0;
+  }
+
+  .opt {
+    flex: 1;
+    .flex-end();
+
+    height: 100%;
+    padding-bottom: 15px;
+    text-align: right;
+    button {
+      height: 100%;
+      width: 50px;
+      outline: none;
+      border: 0;
+      background-color: transparent;
+      color: @white1;
+      font-size: 16px;
+      .flex-center();
+    }
+
+    .min {
+      padding-top: 3px;
+    }
+
+    .min:hover,
+    .max:hover {
+      background-color: #001e38;
+    }
+
+    .quit:hover {
+      background-color: #720202;
+    }
+  }
+
+  .icon {
+    .flex-start();
+    padding: 10px;
+    span {
+      background-image: url(~"@assets/logo.svg");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 30px;
+      width: 30px;
+    }
+  }
+}
