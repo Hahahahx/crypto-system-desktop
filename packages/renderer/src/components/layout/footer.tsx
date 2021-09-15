@@ -18,7 +18,7 @@ export const Footer = () => {
         <ApiOutlined />
         <div>{IpfsModule.host}</div>
       </Space>
-      <div className="info">金钱猫科技股份有限公司 · ux</div>
+      <div className="info">金钱猫科技股份有限公司 © 2021 ux</div>
       <div className="opt">
         <BellOutlined className="log" />
       </div>

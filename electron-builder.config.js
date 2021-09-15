@@ -9,7 +9,7 @@ if (process.env.VITE_APP_VERSION === undefined) {
  */
 const config = {
   appId: "com.ux.app",
-  productName: "ux-electron-start",
+  productName: "ipfs-crypt",
   copyright: "Copyright © 2021 ux",
   asar: true,
   directories: {
