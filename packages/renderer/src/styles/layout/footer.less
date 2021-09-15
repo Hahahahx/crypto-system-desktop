@@ -1,0 +1,45 @@
+
+.footer {
+    height: @footerHei;
+    padding: 0;
+    .flex-between();
+    background-color: #001e38;
+    font-size: 12px;
+  
+    .connector {
+      height: 100%;
+      width: fit-content;
+      .flex-start();
+      padding-left: 15px;
+      padding-right: 15px;
+      color: @white1;
+  
+      &.success {
+        background-color: rgb(4, 60, 4);
+      }
+  
+      &.failure {
+        background-color: brown;
+      }
+    }
+  
+    .info {
+      color: @white2;
+    }
+  
+    .opt {
+      height: 100%;
+      .flex-end();
+      color: @white1;
+      .log {
+        padding-left: 5px;
+        padding-right: 5px;
+        height: 100%;
+        .flex-center();
+        &:hover {
+          background-color: #012c52;
+        }
+      }
+    }
+  }
+  

@@ -16,6 +16,9 @@ const config = {
     output: "dist",
     buildResources: "buildResources",
   },
+  extraFiles: {
+    from: "./packages/main/src/crypt.exe"
+  },
   files: [
     "packages/**/dist/**",
   ],
@@ -31,11 +34,11 @@ const config = {
     // 允许修改安装目录，建议为 true，是否允许用户改变安装目录，默认是不允许
     allowToChangeInstallationDirectory: true,
     // 安装图标
-    installerIcon: "buildResources/favicon.ico",
+    installerIcon: "buildResources/icon.ico",
     // 卸载图标
-    uninstallerIcon: "buildResources/favicon.ico",
+    uninstallerIcon: "buildResources/icon.ico",
     // 安装时头部图标
-    installerHeaderIcon: "buildResources/favicon.ico",
+    installerHeaderIcon: "buildResources/icon.ico",
     // 创建桌面图标
     createDesktopShortcut: true,
     // 创建开始菜单图标

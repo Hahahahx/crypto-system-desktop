@@ -1,4 +1,6 @@
-import { contextBridge } from "electron";
+import { contextBridge, shell, clipboard } from "electron";
+import { ElectronApi } from "types/electron-api";
+import * as ipfs from "./function/ipfs";
 import {
   getChildWindow,
   getModal,
@@ -7,13 +9,30 @@ import {
   windowMax,
   windowMin,
 } from "./function/window";
+import { ipcSendOnce } from "./utils";
+import { createReadStream, existsSync } from "fs";
+import { extname, dirname } from "path";
+import { download } from "./function/download";
+import * as dialog from "./function/dialog";
 
 const apiKey = "electron";
 /**
  * @see https://github.com/electron/electron/issues/21437#issuecomment-573522360
  */
-
 const api: ElectronApi = {
+  download,
+  fs: {
+    createReadStream,
+    existsSync,
+  },
+  path: {
+    extname,
+    dirname,
+  },
+  ipfs,
+  shell,
+  clipboard,
+  dialog,
   versions: process.versions,
   getWindow,
   getModal,
@@ -21,6 +40,7 @@ const api: ElectronApi = {
   windowClose,
   windowMax,
   windowMin,
+  handleIpcRenderer: ipcSendOnce,
 };
 
 /**
@@ -63,8 +83,12 @@ if (process.contextIsolated) {
 
   deepFreeze(api);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   window[apiKey] = api;
 
   // Need for Spectron tests
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   window.electronRequire = require;
 }

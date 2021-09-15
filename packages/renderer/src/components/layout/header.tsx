@@ -11,7 +11,7 @@ export const Header: FC<{ isModal?: boolean }> = (params) => {
       <div className="icon">
         <span />
       </div>
-      <p className="title">Electron-start</p>
+      <p className="title">IPFS-Crypto-System</p>
       <div className="opt">
         <OptBtn {...params} />
       </div>

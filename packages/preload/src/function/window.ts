@@ -14,7 +14,7 @@ import { ipcSendOnce } from "../utils";
  */
 const getModal = (
   route: string,
-  options?: Electron.BrowserWindowConstructorOptions,
+  options?: Electron.BrowserWindowConstructorOptions
 ): void => {
   createWindow(route, WindowOpt.Modal, options);
 };
@@ -26,7 +26,7 @@ const getModal = (
  */
 const getChildWindow = (
   route: string,
-  options?: Electron.BrowserWindowConstructorOptions,
+  options?: Electron.BrowserWindowConstructorOptions
 ): void => {
   createWindow(route, WindowOpt.ChildWindow, options);
 };
@@ -38,7 +38,7 @@ const getChildWindow = (
  */
 const getWindow = (
   route: string,
-  options?: Electron.BrowserWindowConstructorOptions,
+  options?: Electron.BrowserWindowConstructorOptions
 ): void => {
   createWindow(route, WindowOpt.Window, options);
 };
@@ -46,7 +46,7 @@ const getWindow = (
 const createWindow = (
   route: string,
   type: WindowOpt,
-  options?: Electron.BrowserWindowConstructorOptions,
+  options?: Electron.BrowserWindowConstructorOptions
 ) => {
   ipcSendOnce(type, {
     route,
@@ -84,7 +84,6 @@ const windowMin = (): Promise<{
 const windowClose = () => {
   return ipcSendOnce(WindowOpt.Close);
 };
-
 
 export {
   getChildWindow,

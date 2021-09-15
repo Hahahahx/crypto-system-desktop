@@ -21,10 +21,14 @@ export class BrowserWindow {
         ? ViteDevServerUrl
         : new URL(
             "../renderer/dist/index.html",
-            "file://" + __dirname,
+            "file://" + __dirname
           ).toString();
 
     this.window = new ElectronBrowserWindow({
+      minHeight: 600,
+      minWidth: 1000,
+      height: 600,
+      width: 1000,
       ...opt?.options,
       show: false, // 使用 'ready-to-show' 事件来处理打开窗体
       frame: false,
@@ -32,6 +36,7 @@ export class BrowserWindow {
         preload: join(__dirname, "../../preload/dist/index.cjs"),
         contextIsolation: !isTestMode, // 非测试模式下 contextIsolation: true
         enableRemoteModule: isTestMode, // 非测试模式下 enableRemoteModule: false
+        webSecurity: !isDevMode,
       },
     });
     this.id = this.window.id.toString();

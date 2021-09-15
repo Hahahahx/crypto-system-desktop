@@ -1,0 +1,44 @@
+.sider {
+  background-color: @white1;
+  position: relative;
+
+  .drag-box {
+    position: absolute;
+    cursor: e-resize;
+    right: 0;
+    bottom: 0;
+    width: 4px;
+    height: 100%;
+    &:hover {
+      background-color: rgba(24, 0, 240, 0.111);
+    }
+    transition: all 0.2s;
+  }
+
+  .ant-layout-sider {
+    padding-top: 10px;
+    background-color: @white1;
+    height: 100%;
+    overflow: overlay;
+    .scroll();
+  }
+
+  .ant-menu {
+    background-color: @white1;
+  }
+  .ant-menu {
+    border: 0 !important;
+  }
+
+  .ant-menu-vertical .ant-menu-item::after,
+  .ant-menu-vertical-left .ant-menu-item::after,
+  .ant-menu-vertical-right .ant-menu-item::after,
+  .ant-menu-inline .ant-menu-item::after {
+    border-right: 2px solid #5bacf7;
+  }
+
+  .icon {
+    padding-right: 10px;
+    font-size: 18px;
+  }
+}

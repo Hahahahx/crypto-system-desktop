@@ -1,25 +1,19 @@
-import { Header } from "@/components";
-import { useElectron } from "@/hooks/electron";
-import { Button, Layout } from "antd";
+import { Footer, Header, Sider, Tabs } from "@components/index";
+import { Layout } from "antd";
 import React from "react";
 
 const Main = () => {
-  const { getModal } = useElectron();
   return (
     <>
-      <Layout className="layout">
-        <Header></Header>
+      <Layout className="wh-100">
+        <Header />
         <Layout>
+          <Sider></Sider>
           <Layout.Content>
-            <Button
-              onClick={() => {
-                getModal("test");
-              }}
-            >
-              openModal
-            </Button>
+            <Tabs></Tabs>
           </Layout.Content>
         </Layout>
+        <Footer />
       </Layout>
     </>
   );

@@ -3,9 +3,15 @@ import ReactDOM from "react-dom";
 import { Routers } from "ux-autoroute";
 import routeConfig from "./router";
 import "@styles/index.less";
+import { ReduxProvider } from "ux-redux-module";
+import { module } from "@/models";
 
 const App = () => {
-  return <Routers type="hash" routers={routeConfig} />;
+  return (
+    <ReduxProvider value={module}>
+      <Routers type="hash" routers={routeConfig} />
+    </ReduxProvider>
+  );
 };
 
 ReactDOM.render(<App />, document.getElementById("app"));

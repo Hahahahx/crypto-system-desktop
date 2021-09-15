@@ -8,4 +8,19 @@ enum WindowOpt {
   Current = "Current",
 }
 
-export { WindowOpt };
+enum Dialog {
+  Save = "Save",
+}
+
+enum Crypto {
+  Init = "Init",
+  Md5 = "Md5",
+  Encrypt = "Encrypt",
+  Decrypt = "Decrypt",
+}
+
+enum File {
+  Download = "Download",
+}
+
+export { WindowOpt, Crypto, File, Dialog };

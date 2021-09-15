@@ -12,7 +12,12 @@ export class Main {
       app.quit();
       process.exit(0);
     }
-    app.disableHardwareAcceleration();
+    // 禁用GPU渲染
+    // 如果不禁用该项就得确保GPU的正常
+    // GPU如果被关闭就会照成程序黑屏
+    // 此处我们还是选择开启它
+    // 显然，有GPU的帮助页面效果就不至于太卡顿
+    // app.disableHardwareAcceleration();
     this.whenReady();
     app.on("window-all-closed", this.onWindowAllClosed);
     app.on("second-instance", this.onSecondInstance);
@@ -39,8 +44,8 @@ export class Main {
   public registerIpcChannels(ipcChannels: IpcChannelInterface[]): Main {
     ipcChannels.forEach((channel) =>
       ipcMain.on(channel.type, (event, request) =>
-        channel.handle(event, request ? JSON.parse(request) : undefined),
-      ),
+        channel.handle(event, request ? JSON.parse(request) : undefined)
+      )
     );
     return this;
   }
@@ -93,13 +98,13 @@ export class Main {
         .then(({ default: installExtension, REACT_DEVELOPER_TOOLS }) =>
           installExtension(
             REACT_DEVELOPER_TOOLS,
-            true,
+            true
             //   {
             //   loadExtensionOptions: {
             //     allowFileAccess: true,
             //   },
             // }
-          ),
+          )
         )
         .catch((e) => console.error("Failed install extension:", e));
     }

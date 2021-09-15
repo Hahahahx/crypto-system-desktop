@@ -1,0 +1,31 @@
+.files {
+  .ant-pro-list-row-title > div {
+    .nowrap();
+    .media(2000px,700px);
+    .media(1500px,500px);
+    .media(1000px,300px);
+    .media(500px,150px);
+  }
+
+  height: 100%;
+}
+
+.media(@minSW,@maxW) {
+  @media only screen and (max-width: @minSW) {
+    max-width: @maxW;
+  }
+}
+
+.upload-files {
+  .ant-pro-list-row-title > div {
+    .nowrap();
+    .media(2000px,700px);
+    .media(1500px,500px);
+    .media(1000px,300px);
+    .media(500px,150px);
+  }
+
+  .ant-pro-list-row {
+    border-bottom: 1px solid rgba(187, 212, 245, 0.172);
+  }
+}

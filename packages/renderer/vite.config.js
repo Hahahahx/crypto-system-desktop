@@ -3,7 +3,6 @@
 import { chrome } from "../../electron-vendors.config.json";
 import { join } from "path";
 import { builtinModules } from "module";
-// import vue from '@vitejs/plugin-vue';
 import reactRefresh from "@vitejs/plugin-react-refresh";
 import vitePluginImp from "vite-plugin-imp";
 import { AutoRouterVitePlugin } from "ux-autoroute-plugin";
@@ -20,12 +19,16 @@ const config = {
   mode: process.env.MODE,
   root: PACKAGE_ROOT,
   resolve: {
-    alias: {
-      "@": rendererPath + "/",
-      "@assets": path.join(rendererPath, "..") + "/assets/",
-      "@styles": rendererPath + "/styles/",
-      "@hooks": rendererPath + "/hooks/",
-    },
+    alias: [
+      { find: /^~/, replacement: "" },
+      { find: "@", replacement: rendererPath + "/", },
+      { find: "@assets", replacement: path.join(rendererPath, "..") + "/assets/", },
+      { find: "@styles", replacement: rendererPath + "/styles/", },
+      { find: "@components", replacement: rendererPath + "/components/", },
+      { find: "@models", replacement: rendererPath + "/models/", },
+      { find: "@services", replacement: rendererPath + "/services/", },
+      { find: "@hooks", replacement: rendererPath + "/hooks/", },
+    ]
   },
   plugins: [
     reactRefresh(),
@@ -45,6 +48,13 @@ const config = {
       ],
     })],
   base: "",
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+      }
+    }
+  },
   server: {
     fs: {
       strict: true,
@@ -62,20 +72,24 @@ const config = {
       },
       safari10: false,
     },
+
     rollupOptions: {
+      // 在项目中用到了crypto包，如果此处将全部的模块禁用那么会就会找不到包
+      // 所以将crypto从禁用列表里过滤出去
       external: [
-        ...builtinModules,
+        ...builtinModules.filter(item => item !== "crypto"),
       ],
       output: {
         manualChunks: {
           react: ["react", "react-dom"],
           antd: ["antd"],
+          antdPro: ["@ant-design/pro-list"],
         },
       },
     },
     emptyOutDir: true,
     brotliSize: false,
-  },
+  }
 };
 
 export default config;
