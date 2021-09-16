@@ -1,4 +1,4 @@
-import { BrowserWindow as ElectronBrowserWindow } from "electron";
+import { BrowserWindow as ElectronBrowserWindow, Menu } from "electron";
 import { join } from "path";
 import { isDevMode, isTestMode, ViteDevServerUrl } from "./utils";
 
@@ -25,11 +25,6 @@ export class BrowserWindow {
           ).toString();
 
     this.window = new ElectronBrowserWindow({
-      minHeight: 600,
-      minWidth: 1000,
-      height: 600,
-      width: 1000,
-      ...opt?.options,
       show: false, // 使用 'ready-to-show' 事件来处理打开窗体
       frame: false,
       webPreferences: {
@@ -38,11 +33,17 @@ export class BrowserWindow {
         enableRemoteModule: isTestMode, // 非测试模式下 enableRemoteModule: false
         webSecurity: !isDevMode,
       },
+      ...opt?.options,
     });
     this.id = this.window.id.toString();
+    const url = this.route ? "#/" + this.route : "";
+    this.window.loadURL(this.pageUrl + url);
+    if (isDevMode) {
+      this.window.webContents.openDevTools();
+    }
   }
 
-  async toShow() {
+  toShow(): void {
     /**
      * 如果使用` show: ture `那么在关闭窗体时可能会遇到一些问题
      * 使用` show: false `然后用 ` ready-to-show `来监听窗体关闭事件可以解决这个问题
@@ -51,13 +52,6 @@ export class BrowserWindow {
      */
     this.window.on("ready-to-show", () => {
       this.window.show();
-
-      if (isDevMode) {
-        this.window.webContents.openDevTools();
-      }
     });
-
-    const url = this.route ? "#/" + this.route : "";
-    await this.window.loadURL(this.pageUrl + url);
   }
 }

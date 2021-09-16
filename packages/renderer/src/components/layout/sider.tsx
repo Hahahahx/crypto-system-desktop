@@ -75,7 +75,7 @@ export const Sider = () => {
                 <div>全部</div>
               </div>
             </Menu.Item>
-            <Menu.Item key="cryptFile">
+            {/* <Menu.Item key="cryptFile">
               <div className="flex-start">
                 <Icon className="icon" type="cryptFile_sider" />
                 <div>加密</div>
@@ -86,7 +86,7 @@ export const Sider = () => {
                 <Icon className="icon" type="rawFile_sider" />
                 <div>普通</div>
               </div>
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item key="downloadFile">
               <div className="flex-start">
                 <Icon className="icon" type="download_sider" />

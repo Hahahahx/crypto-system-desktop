@@ -17,7 +17,6 @@ export const page = {
 
 export type PageName = keyof typeof page;
 
-
 export interface PageProps {
   page: PageName;
   icon: string;

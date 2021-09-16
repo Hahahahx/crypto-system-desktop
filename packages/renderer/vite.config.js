@@ -28,6 +28,7 @@ const config = {
       { find: "@models", replacement: rendererPath + "/models/", },
       { find: "@services", replacement: rendererPath + "/services/", },
       { find: "@hooks", replacement: rendererPath + "/hooks/", },
+      { find: "@common", replacement: path.join(rendererPath, "..", '..') + "/common/", },
     ]
   },
   plugins: [
@@ -42,7 +43,9 @@ const config = {
       libList: [
         {
           libName: "antd",
-          style: (name) => `antd/lib/${name}/style/index.css`,
+          style: (name) => {
+            return name === "row" ? null : `antd/lib/${name}/style/index.css`
+          },
           libDirectory: "es",
         },
       ],

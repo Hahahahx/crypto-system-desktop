@@ -85,6 +85,21 @@ const windowClose = () => {
   return ipcSendOnce(WindowOpt.Close);
 };
 
+/**
+ * 关闭此程序
+ * @returns
+ */
+const appQuit = () => {
+  return ipcSendOnce(WindowOpt.Quit);
+};
+/**
+ * 开关主窗体
+ * @returns
+ */
+const toggleMainWindow = () => {
+  return ipcSendOnce(WindowOpt.ToggleMain);
+};
+
 export {
   getChildWindow,
   getWindow,
@@ -92,4 +107,6 @@ export {
   windowClose,
   windowMax,
   windowMin,
+  appQuit,
+  toggleMainWindow,
 };

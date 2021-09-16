@@ -1,5 +1,6 @@
 import React from "react";
 import ipfsLogo from "@assets/ipfs-logo.svg";
+import logo from "@assets/icon.svg";
 import IconFonts from "./iconfont";
 
 interface IconStr {
@@ -7,6 +8,9 @@ interface IconStr {
 }
 
 const icon: IconStr = {
+  logo: {
+    src: logo,
+  },
   unknow: "ipfs-crypt-unknow",
   setting: "ipfs-crypt-setting2",
   setting_sider: "ipfs-crypt-setting",

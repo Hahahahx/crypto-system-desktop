@@ -12,7 +12,8 @@
       "@components/*": ["./src/components/*"],
       "@models/*": ["./src/models/*"],
       "@services/*": ["./src/services/*"],
-      "@styles/*": ["./src/styles/*"]
+      "@styles/*": ["./src/styles/*"],
+      "@common/*": ["../common/*"]
     },
     "lib": ["ESNext", "dom", "dom.iterable"]
   },

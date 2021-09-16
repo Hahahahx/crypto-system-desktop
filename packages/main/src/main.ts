@@ -1,10 +1,15 @@
-import { app, ipcMain } from "electron";
+import { app, ipcMain, nativeImage } from "electron";
 import { BrowserWindow } from "./browserWindow";
 import { disableShortcuts } from "./shortcuts.keys";
 import { isDevMode, isProMode, platform } from "./utils";
+import { Tray } from "./tray";
+import logo from "../../../buildResources/icon.png";
 
 export class Main {
   private mainWindow?: BrowserWindow;
+  // 当我们声明Tray模块中的变量时，
+  // 没有将其声明为全局变量，导致在运行过程中，会被垃圾回收机制回收掉。
+  private tray?: Tray;
 
   public init(): Main {
     const isSingleInstance = app.requestSingleInstanceLock();
@@ -76,8 +81,18 @@ export class Main {
       .whenReady()
       .then(() => {
         disableShortcuts();
-        this.mainWindow = new BrowserWindow();
+        this.mainWindow = new BrowserWindow({
+          options: {
+            minHeight: 600,
+            minWidth: 1000,
+            height: 600,
+            width: 1000,
+          },
+        });
         this.mainWindow.toShow();
+        this.tray = new Tray(nativeImage.createFromDataURL(logo)).init(
+          this.mainWindow
+        );
       })
       .catch((e) => console.error("Failed create window:", e));
 

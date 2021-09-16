@@ -16,9 +16,13 @@ const config = {
     output: "dist",
     buildResources: "buildResources",
   },
-  extraFiles: {
+  extraResources: [{
     from: "./packages/main/src/crypt.exe"
-  },
+  }, {
+    from: "./buildResources/introduce.docx",
+  }, {
+    from: "./buildResources/design.docx"
+  }],
   files: [
     "packages/**/dist/**",
   ],
@@ -48,10 +52,11 @@ const config = {
   },
   win: {
     target: ["nsis", "zip"],
+    requestedExecutionLevel: "highestAvailable"
   },
-  mac: {
-    target: ["dmg", "zip"],
-  },
+  // mac: {
+  //   target: ["dmg", "zip"],
+  // },
 };
 
 module.exports = config;

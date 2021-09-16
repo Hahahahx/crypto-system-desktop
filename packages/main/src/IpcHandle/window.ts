@@ -1,4 +1,8 @@
-import { IpcMainEvent, BrowserWindow as ElectronBrowserWindow } from "electron";
+import {
+  IpcMainEvent,
+  BrowserWindow as ElectronBrowserWindow,
+  app,
+} from "electron";
 import { WindowOpt } from "../../../common/IpcEvent";
 import { BrowserWindow } from "../browserWindow";
 import { getWindow, ipcReplyCurrentWindow } from "../utils";
@@ -77,7 +81,8 @@ export class WindowCloseChannel implements IpcChannelInterface {
   handle(event: IpcMainEvent, request?: IpcRequest): void {
     const window = ElectronBrowserWindow.getFocusedWindow();
     if (window) {
-      window.close();
+      window.hide();
+      event.preventDefault();
     }
   }
 }
@@ -91,5 +96,12 @@ export class WindowCurrentChannel implements IpcChannelInterface {
         result: window.isModal(),
       });
     }
+  }
+}
+
+export class AppQuit implements IpcChannelInterface {
+  type = WindowOpt.Quit;
+  handle(event: IpcMainEvent, request?: IpcRequest): void {
+    app.quit();
   }
 }

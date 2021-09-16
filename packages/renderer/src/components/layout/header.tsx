@@ -3,7 +3,9 @@ import { Layout } from "antd";
 import { Icon } from "..";
 import { useElectron } from "@hooks/electron";
 const { Header: AntdHeader } = Layout;
-const { windowMin, windowMax, windowClose } = useElectron();
+const {
+  browserWindow: { windowMin, windowMax, windowClose },
+} = useElectron();
 
 export const Header: FC<{ isModal?: boolean }> = (params) => {
   return (

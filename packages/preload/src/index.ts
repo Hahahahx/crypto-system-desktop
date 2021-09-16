@@ -8,19 +8,24 @@ import {
   windowClose,
   windowMax,
   windowMin,
+  appQuit,
+  toggleMainWindow,
 } from "./function/window";
 import { ipcSendOnce } from "./utils";
 import { createReadStream, existsSync } from "fs";
-import { extname, dirname } from "path";
+import { join, extname, dirname } from "path";
 import { download } from "./function/download";
 import * as dialog from "./function/dialog";
-
+import * as process from "process";
 const apiKey = "electron";
 /**
  * @see https://github.com/electron/electron/issues/21437#issuecomment-573522360
  */
+
 const api: ElectronApi = {
   download,
+  isDev: import.meta.env.DEV,
+  mainPath: process.cwd(),
   fs: {
     createReadStream,
     existsSync,
@@ -34,12 +39,16 @@ const api: ElectronApi = {
   clipboard,
   dialog,
   versions: process.versions,
-  getWindow,
-  getModal,
-  getChildWindow,
-  windowClose,
-  windowMax,
-  windowMin,
+  browserWindow: {
+    getWindow,
+    getModal,
+    getChildWindow,
+    windowClose,
+    windowMax,
+    windowMin,
+    appQuit,
+    toggleMainWindow,
+  },
   handleIpcRenderer: ipcSendOnce,
 };
 

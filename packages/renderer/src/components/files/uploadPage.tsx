@@ -4,7 +4,7 @@ import ProList from "@ant-design/pro-list";
 import { Icon } from "..";
 import { useModule } from "ux-redux-module";
 import { UploadFileItem } from "@/models/FileModule";
-import { mertic } from "../../../../common/util";
+import { mertic } from "@common/util";
 import { useElectron } from "@/hooks/electron";
 import { TModule } from "types";
 

@@ -6,6 +6,8 @@ enum WindowOpt {
   Min = "Min",
   Close = "Close",
   Current = "Current",
+  Quit = "Quit",
+  ToggleMain = "ToggleMain",
 }
 
 enum Dialog {

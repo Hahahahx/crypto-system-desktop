@@ -6,8 +6,8 @@ import { useModule } from "ux-redux-module";
 import { useElectron } from "@/hooks/electron";
 import { TModule } from "types";
 import { DownloadFileItem } from "@/models/FileModule";
-import { Crypto } from "../../../../common/IpcEvent";
-import { mertic } from "../../../../common/util";
+import { Crypto } from "@common/IpcEvent";
+import { mertic } from "@common/util";
 
 const { fs, shell, dialog, handleIpcRenderer } = useElectron();
 
@@ -31,6 +31,12 @@ export const DownloadFiles = () => {
               return (
                 <div
                   onClick={() => {
+                    const exist = fs.existsSync(entity.Cache as string);
+                    if (!exist) {
+                      message.warn("文件源已经丢失！");
+                      FileModule.removeDownloadFile(entity as any);
+                      return;
+                    }
                     shell.openExternal(entity.Cache as string);
                   }}
                   title={`文件名：${entity.Name}\n大小：${mertic(
@@ -84,14 +90,15 @@ export const DownloadFiles = () => {
                           key="invite"
                           loading={loading}
                           onClick={() => {
+                            setLoading(true);
                             const exist = fs.existsSync(entity.Cache as string);
 
                             if (!exist) {
                               message.warn("文件源已经丢失！");
                               FileModule.removeDownloadFile(entity as any);
+                              setLoading(false);
                               return;
                             }
-
                             dialog
                               .showSaveDialogSync({
                                 defaultPath: entity.Name,
@@ -104,6 +111,7 @@ export const DownloadFiles = () => {
                                   file: entity.Cache,
                                 }).then((res) => {
                                   message.success("文件解密到：" + path);
+                                  setLoading(false);
                                 });
                               });
                           }}

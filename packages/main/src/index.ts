@@ -8,12 +8,14 @@ import {
   WindowMaxChannel,
   WindowMinChannel,
   WindowCurrentChannel,
+  AppQuit,
 } from "./IpcHandle/window";
 import { Main } from "./main";
 
 new Main()
   .init()
   .registerIpcChannels([
+    new AppQuit(),
     new WindowChannel(WindowOpt.Modal),
     new WindowChannel(WindowOpt.ChildWindow),
     new WindowChannel(WindowOpt.Window),
@@ -21,12 +23,16 @@ new Main()
     new WindowMaxChannel(),
     new WindowCloseChannel(),
     new WindowCurrentChannel(),
-    new CryptoChannel(Crypto.Md5, (opt) => `md5  ${opt.file}`),
-    new CryptoChannel(Crypto.Encrypt, (opt) => `encrypt ${opt.file}`),
-    new CryptoChannel(
-      Crypto.Decrypt,
-      (opt) => `decrypt -k ${opt.key} -n ${opt.name} ${opt.file}`
-    ),
+    new CryptoChannel(Crypto.Md5, (opt) => ["md5", opt.file]),
+    new CryptoChannel(Crypto.Encrypt, (opt) => ["encrypt", opt.file]),
+    new CryptoChannel(Crypto.Decrypt, (opt) => [
+      "decrypt",
+      "-k",
+      opt.key,
+      "-n",
+      opt.name,
+      opt.file,
+    ]),
     new DownloadChannel(),
     new DialogChannel(Dialog.Save),
   ]);

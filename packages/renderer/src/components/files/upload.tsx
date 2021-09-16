@@ -4,8 +4,8 @@ import React from "react";
 import { TModule } from "types";
 import { useModule } from "ux-redux-module";
 import { Icon } from "..";
-import { Crypto } from "../../../../common/IpcEvent";
-import { mertic } from "../../../../common/util";
+import { Crypto } from "@common/IpcEvent";
+import { mertic } from "@common/util";
 
 interface UploadBoxParams {
   isModalVisible: boolean;

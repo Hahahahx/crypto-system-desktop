@@ -8,6 +8,21 @@ import {
   WebContents,
 } from "electron";
 
+type ipcFuncReturn = () => Promise<{
+  event: Electron.IpcRendererEvent;
+  args: any;
+}>;
+
+type ipcFuncWindowCreate = (
+  route: string,
+  options?: BrowserWindowConstructorOptions
+) => void;
+
+type ipcFuncWindowOpt = () => Promise<{
+  event: IpcRendererEvent;
+  args: { result: boolean };
+}>;
+
 interface Api {
   ipfs: {
     connect: (url: string) => Promise<{
@@ -60,22 +75,18 @@ interface Api {
       >;
     };
   };
+
+  browserWindow: {
+    getModal: ipcFuncWindowCreate;
+    getWindow: ipcFuncWindowCreate;
+    getChildWindow: ipcFuncWindowCreate;
+    windowClose: () => void;
+    windowMax: ipcFuncWindowOpt;
+    windowMin: ipcFuncWindowOpt;
+    appQuit: ipcFuncReturn;
+    toggleMainWindow: ipcFuncReturn;
+  };
   versions: Readonly<NodeJS.ProcessVersions>;
-  getModal: (route: string, options?: BrowserWindowConstructorOptions) => void;
-  getWindow: (route: string, options?: BrowserWindowConstructorOptions) => void;
-  getChildWindow: (
-    route: string,
-    options?: BrowserWindowConstructorOptions
-  ) => void;
-  windowClose: () => void;
-  windowMax: () => Promise<{
-    event: IpcRendererEvent;
-    args: { result: boolean };
-  }>;
-  windowMin: () => Promise<{
-    event: IpcRendererEvent;
-    args: { result: boolean };
-  }>;
   handleIpcRenderer: (
     channel: string,
     params?: any
@@ -104,7 +115,16 @@ interface Api {
   };
   clipboard: Clipboard;
   download: (
-    url: string,
+    params: {
+      url: string;
+      CID: string;
+      Ctime?: string;
+      Encrypt: boolean;
+      Key: string;
+      MD5: string;
+      Name: string;
+      Size: number;
+    },
     onUpdated: (args: {
       savePath: string;
       state: string;
@@ -115,6 +135,8 @@ interface Api {
     savePath: string;
     state: string;
   }>;
+  isDev: boolean;
+  mainPath: string;
 }
 
 type ElectronApi = Api;

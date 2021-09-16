@@ -6,7 +6,7 @@ import { ProfileOutlined } from "@ant-design/icons";
 import { UploadBox } from "./upload";
 import { useModule } from "ux-redux-module";
 import { TModule } from "types";
-import { mertic } from "../../../../common/util";
+import { mertic } from "@common/util";
 import { useElectron } from "@/hooks/electron";
 import { FileItem } from "@/models/FileModule";
 import ProList from "@ant-design/pro-list";

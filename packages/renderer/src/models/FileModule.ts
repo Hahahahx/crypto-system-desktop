@@ -53,16 +53,16 @@ class FileModule {
         Process: 0,
       }) - 1;
 
+    message.info("开始下载文件：" + file.Name);
     this.update();
 
     download(
-      module.IpfsModule.gateway() + file.CID,
+      { ...file, url: module.IpfsModule.gateway() + file.CID },
       ({ savePath, state, isPaused, byte }) => {
         this.downloadFiles[index].Cache = savePath;
         this.update();
-        message.info("开始下载文件：" + savePath);
         if (state === "interrupted") {
-          console.log("下载意外中断");
+          message.info("文件下载意外中断：" + savePath);
         } else if (state === "progressing") {
           if (isPaused) {
             console.log("下载暂停");

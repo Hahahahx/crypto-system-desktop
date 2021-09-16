@@ -1,5 +1,6 @@
 import Page from './pages/index';
 import PageMain from './pages/main/index';
+import PageMenu from './pages/menu/index';
 import PageTest from './pages/test/index';
 import loadable from '@loadable/component';
 
@@ -18,6 +19,12 @@ const router=[
 				},
 				component: PageMain,
 				path: '/main',
+				child: null
+			},
+			{
+				config: null,
+				component: PageMenu,
+				path: '/menu',
 				child: null
 			},
 			{

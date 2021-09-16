@@ -1,21 +1,23 @@
 import { join } from "path";
-import { exec } from "child_process";
+import { execFile } from "child_process";
 import { Crypto } from "../../../common/IpcEvent";
-import { IpcMainEvent } from "electron";
+import { app, IpcMainEvent } from "electron";
 import { isDevMode } from "../utils";
 
 const exe = isDevMode
   ? join(__dirname, "..", "src", "crypt.exe")
-  : join(process.cwd(), "crypt.exe");
+  : join(process.cwd(), "resources", "crypt.exe");
+
+console.log(exe);
 
 export function initCrypt(): void {
   console.log(exe);
-  exec(`${exe} init`);
+  execFile(exe, ["init"]);
 }
 
-function execCrypt(command: string): Promise<any> {
+function execCrypt(command: string[]): Promise<any> {
   return new Promise((res, rej) => {
-    exec(`${exe} ${command}`, (err: any, stdout: any, stderr: any) => {
+    execFile(exe, command, (err: any, stdout: any, stderr: any) => {
       if (err) {
         rej(stderr);
       }
@@ -30,9 +32,9 @@ function execCrypt(command: string): Promise<any> {
 }
 
 export class CryptoChannel implements IpcChannelInterface {
-  command: (opt: any) => string;
+  command: (opt: any) => string[];
   type: Crypto;
-  constructor(v: Crypto, command: (opt: any) => string) {
+  constructor(v: Crypto, command: (opt: any) => string[]) {
     this.type = v;
     this.command = command;
   }
