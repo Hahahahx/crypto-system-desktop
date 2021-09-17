@@ -65,7 +65,7 @@ class FileModule {
           message.info("文件下载意外中断：" + savePath);
         } else if (state === "progressing") {
           if (isPaused) {
-            console.log("下载暂停");
+            // console.log("下载暂停");
           } else {
             this.downloadFiles[index].Process =
               byte / (this.downloadFiles[index].Size as number);
@@ -76,13 +76,13 @@ class FileModule {
     ).then(
       ({ savePath }) => {
         message.success("下次完成：" + savePath);
-        console.log("Download successfully");
+        // console.log("Download successfully");
         this.downloadFiles[index].Cache = savePath;
         this.downloadFiles[index].Process = 1;
         this.update();
       },
       () => {
-        console.log(`Download failed`);
+        // console.log(`Download failed`);
         this.downloadFiles.splice(index, 1);
         this.update();
       }
@@ -104,10 +104,10 @@ class FileModule {
     index: number,
     upload?: boolean
   ) {
-    console.log(data);
+    // console.log(data);
     this.uploadFiles[index] = { ...this.uploadFiles[index], ...data };
     this.update();
-    console.log(this.uploadFiles[index]);
+    // console.log(this.uploadFiles[index]);
     if (upload) {
       this.uploadFile(index);
     }
@@ -118,7 +118,7 @@ class FileModule {
       ? this.uploadFiles[fileIndex].Cache
       : this.uploadFiles[fileIndex].Path;
 
-    console.log(path);
+    // console.log(path);
 
     ipfs
       .add(path as string, (bt, path) => {
@@ -133,6 +133,8 @@ class FileModule {
         return AuthApi.UploadFile({
           ...this.uploadFiles[fileIndex],
           CID: res.cid.toString(),
+        }).then(() => {
+          this.getList();
         });
       });
   }

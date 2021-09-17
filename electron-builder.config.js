@@ -52,7 +52,8 @@ const config = {
   },
   win: {
     target: ["nsis", "zip"],
-    requestedExecutionLevel: "highestAvailable"
+    // 管理员模式，但是该模式下会让鼠标拖动失效
+    // requestedExecutionLevel: "highestAvailable"
   },
   // mac: {
   //   target: ["dmg", "zip"],

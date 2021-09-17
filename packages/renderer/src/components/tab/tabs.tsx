@@ -20,7 +20,7 @@ export const Tabs: FC = ({ children }) => {
     document
       .querySelector("#container")
       ?.addEventListener("wheel", (ev: any) => {
-        //   console.log('sdfsdf')
+        //   // console.log('sdfsdf')
         ev.currentTarget.scrollLeft += ev.deltaY / 2;
       });
   }, []);
@@ -71,7 +71,7 @@ export const Tabs: FC = ({ children }) => {
             extra={[
               <Button
                 type="primary"
-                key="console"
+                key="// console"
                 onClick={() => {
                   PageModule.addPage({
                     page: "config",

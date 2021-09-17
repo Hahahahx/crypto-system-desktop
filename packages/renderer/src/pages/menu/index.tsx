@@ -10,7 +10,7 @@ const {
 
 const IMenu = () => {
   const handleClick = (e: any) => {
-    console.log("click ", e);
+    // console.log("click ", e);
   };
 
   return (

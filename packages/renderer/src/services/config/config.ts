@@ -13,8 +13,8 @@ instance.defaults.withCredentials = true;
 instance.defaults.baseURL = "http://192.168.50.219:9090";
 // instance.defaults.timeout = 5000;
 // instance.interceptors.request.use((config: AxiosRequestConfig) => {
-//   console.log(config.baseURL);
-//   console.log(config.url);
+//   // console.log(config.baseURL);
+//   // console.log(config.url);
 //   // config.headers = { "Content-Type": "application/json" };
 //   return config;
 // });
@@ -31,7 +31,7 @@ instance.interceptors.response.use(
   },
   (rej) => {
     return rej;
-    // console.log(rej);
+    // // console.log(rej);
     // if (connect) {
     //   connect = false;
     // }

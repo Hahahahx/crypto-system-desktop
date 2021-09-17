@@ -125,7 +125,7 @@ export const UploadBox = ({
               input.click();
               input.onchange = (e: any) => {
                 setFile(e.target.files[0]);
-                console.log(e.target.files[0]);
+                // console.log(e.target.files[0]);
               };
             }}
           >

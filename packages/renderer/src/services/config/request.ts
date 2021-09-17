@@ -58,7 +58,7 @@ export class request {
   //   return instance.get(url, { responseType: "blob" }).then(
   //     (res) => {
   //       if (!res) {
-  //         console.error("下载文件失败");
+  //         // console.error("下载文件失败");
   //         return res;
   //       }
   //       // @ts-ignore

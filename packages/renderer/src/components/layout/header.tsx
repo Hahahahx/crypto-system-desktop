@@ -30,7 +30,7 @@ const OptBtn: FC<{ isModal?: boolean }> = ({ isModal }) => {
 
   const handleMax = () => {
     windowMax().then((res: any) => {
-      console.log(res);
+      // console.log(res);
       if (res.args.result) {
         setMaxIcon("restore");
       } else {
